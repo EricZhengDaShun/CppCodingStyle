@@ -48,3 +48,6 @@
 
 # Ignore vcpkg_installed folders
 vcpkg_installed
+
+# Ignore project setting files
+*.user

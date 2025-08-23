@@ -516,6 +516,104 @@ void rule25()
 }
 
 
+// rule 26
+// C++ and C bool values should be written as true and false
+void rule26()
+{
+    // Right
+    bool isReady { true };
+    // Wrong
+    bool isFound { 0 };
+}
+
+
+// rule 27
+// Tests for true/false, null/non-null, and zero/non-zero should all be done without equality comparisons.
+void rule27()
+{
+    bool condition { true };
+    int* ptr { nullptr };
+    int count { 0 };
+    auto doIt = []() { };
+    // Right
+    if (condition)
+        doIt();
+
+    if (!ptr)
+        return;
+
+    if (!count)
+        return;
+
+    // Wrong
+    if (condition == true)
+        doIt();
+
+    if (ptr == NULL)
+        return;
+
+    if (count == 0)
+        return;
+}
+
+
+// rule 28
+// Unless required in order to force floating point math, do not append .0, .f and .0f to floating point literals.
+void rule28()
+{
+    // Right
+    {
+        const double duration = 60;
+
+        auto setDiameter = [](float diameter) { 
+            float radius = diameter / 2; 
+        };
+
+        setDiameter(10);
+
+        const int framesPerSecond = 12;
+        double frameDuration = 1.0 / framesPerSecond;
+    }
+
+    // Wrong
+    {
+        const double duration = 60.0;
+
+        auto setDiameter = [](float diameter) { 
+            float radius = diameter / 2.f; 
+        };
+
+        setDiameter(10.f);
+
+        const int framesPerSecond = 12;
+        double frameDuration = 1 / framesPerSecond;
+    }
+}
+
+
+// rule 29
+// Use CamelCase. Capitalize the first letter, including all letters in an acronym, in a class, struct, protocol, or namespace name. Lower-case the first letter, including all letters in an acronym, in a variable or function name.
+// Right
+struct Data;
+class HTMLDocument;
+class String { };
+String mimeType();
+void rule29Right()
+{
+    size_t bufferSize;
+}
+// Wrong
+struct data;
+class HtmlDocument;
+String MIMEType();
+void rule29Wrong()
+{
+    size_t buffer_size;
+}
+
+
+
+
 int main()
 {
     return EXIT_SUCCESS;
