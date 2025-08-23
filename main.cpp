@@ -612,6 +612,278 @@ void rule29Wrong()
 }
 
 
+// rule 30
+// Data members in C++ classes should be private. Static data members should be prefixed by “s_”. Other data members should be prefixed by “m_”.
+// Right
+static int s_rule30Right;
+class Rule30Right {
+private:
+    int m_size;
+    static int s_test;
+};
+// Wrong
+static int rule30Wrong;
+class Rule30Wrong {
+private:
+    int size;
+    static int test;
+};
+
+
+// rule 31
+// Use full words, except in the rare case where an abbreviation would be more canonical and easier to understand.
+void rule31()
+{
+    // Right
+    size_t characterSize;
+    size_t length;
+    short tabIndex; // more canonical
+
+    // Wrong
+    size_t charSize;
+    size_t len;
+    short tabulationIndex; // bizarre
+}
+
+
+// rule 32
+// Precede boolean values with words like “is” and “did”.
+void rule32()
+{
+    // Right
+    bool isValid { true };
+    bool didSendData { true };
+
+    // Wrong
+    bool valid { true };
+    bool sentData { true };
+}
+
+
+// rule 33
+// Precede setters with the word “set”. Use bare words for getters. Setter and getter names should match the names of the variables being set/gotten.
+class Rule33 {
+public:
+    // Right
+    void setValue(int value)
+    {
+        m_value = value;
+    }
+    int value()
+    {
+        return m_value;
+    }
+
+    // Wrong
+    void setCount(int count)
+    {
+        m_value = count;
+    }
+    int getValue()
+    {
+        return m_value;
+    }
+
+private:
+    int m_value;
+};
+
+
+// rule 34
+// Precede getters that return values through out arguments with the word “get”.
+// Right
+void getName(std::string&);
+// Wrong
+void name(std::string&);
+
+
+// rule 35
+// Use descriptive verbs in function names.
+// Right
+bool convertToASCII(short*, size_t);
+// Wrong
+bool toASCII(short*, size_t);
+
+
+// rule 36
+// The getter function for a member variable should not have any suffix or prefix indicating the function can optionally create or initialize the member variable. Suffix the getter function which does not automatically create the object with IfExists if there is a variant which does.
+// Right
+std::string* styleResolverIfExists();
+std::string& styleResolver();
+// Wrong
+std::string* resolver();
+std::string& ensureResolver();
+
+
+// rule 37 ==Exception does not need to follow==
+// Leave meaningless variable names out of function declarations. A good rule of thumb is if the parameter type name contains the parameter name (without trailing numbers or pluralization), then the parameter name isn’t needed. Usually, there should be a parameter name for bools, strings, and numerical types.
+// Right
+// void setCount(size_t);
+// void doSomething(ScriptExecutionContext*);
+// Wrong
+// void setCount(size_t count);
+// void doSomething(ScriptExecutionContext* context);
+
+
+// rule 38
+// Prefer enums to bools on function parameters if callers are likely to be passing constants, since named constants are easier to read at the call site. An exception to this rule is a setter function, where the name of the function already makes clear what the boolean is.
+// Right
+// doSomething(something, AllowFooBar);
+// paintTextWithShadows(context, ..., textStrokeWidth > 0, isHorizontal());
+// setResizable(false);
+// Wrong
+// doSomething(something, false);
+// setResizable(NotResizable);
+
+
+// rule 39
+// Enum members should use InterCaps with an initial capital letter.
+
+
+// rule 40
+// Prefer const to #define. Prefer inline functions to macros.
+
+
+// rule 41
+// #defined constants should use all uppercase names with words separated by underscores.
+
+
+// rule 42
+// Use #pragma once instead of #define and #ifdef for header guards.
+
+
+// rule 43
+// Constructors for C++ classes should initialize all of their members using C++ initializer syntax. Each member (and superclass) should be indented on a separate line, with the colon or comma preceding the member on that line.
+// Right
+// MyClass::MyClass(Document* document)
+//     : MySuperClass()
+//     , m_myMember(0)
+//     , m_document(document)
+// {
+// }
+//
+// MyOtherClass::MyOtherClass()
+//     : MySuperClass()
+// {
+// }
+//
+// Wrong
+// MyClass::MyClass(Document* document) : MySuperClass()
+// {
+//     m_myMember = 0;
+//     m_document = document;
+// }
+//
+// MyOtherClass::MyOtherClass() : MySuperClass() {}
+
+
+// rule 44
+// 1. Pointer types in non-C++ code
+// Pointer types should be written with a space between the type and the * (so the * is adjacent to the following identifier if any).
+// 2. Pointer and reference types in C++ code
+// Both pointer types and reference types should be written with no space between the type name and the * or &.
+// Right
+// Image* SVGStyledElement::doSomething(PaintInfo& paintInfo)
+// Wrong
+// Image *SVGStyledElement::doSomething(PaintInfo &paintInfo)
+
+
+// rule 45
+// Other #include statements should be in sorted order (case sensitive, as done by the command-line sort tool or the Xcode sort selection command). Don’t bother to organize them in a logical order.
+// Right
+// #include "config.h"
+// #include "HTMLDivElement.h"
+//
+// #include "Attribute.h"
+// #include "HTMLElement.h"
+// #include "QualifiedName.h"
+// Wrong
+// #include "HTMLElement.h"
+// #include "HTMLDivElement.h"
+// #include "QualifiedName.h"
+// #include "Attribute.h"
+
+
+// rule 46
+// Includes of system headers must come after includes of other headers.
+// Right:
+// // ConnectionQt.cpp
+// #include "ArgumentEncoder.h"
+// #include "ProcessLauncher.h"
+// #include "WebPageProxyMessageKinds.h"
+// #include "WorkItem.h"
+// #include <QApplication>
+// #include <QLocalServer>
+// #include <QLocalSocket>
+// Wrong:
+// // ConnectionQt.cpp
+// #include "ArgumentEncoder.h"
+// #include "ProcessLauncher.h"
+// #include <QApplication>
+// #include <QLocalServer>
+// #include <QLocalSocket>
+// #include "WebPageProxyMessageKinds.h"
+// #include "WorkItem.h"
+
+
+// rule 47
+// In header files, do not use “using” statements in namespace (or global) scope.
+
+
+// rule 48
+// In C++ implementation files, do not use “using” declarations of any kind to import names in the standard template library. Directly qualify the names at the point they’re used instead.
+void rule48()
+{
+    // Right
+    std::string tab;
+    // Wrong
+    using std::string;
+    string name;
+}
+
+
+// rule 49
+// The base level declaration of a virtual method inside a class must be declared with the virtual keyword.
+// All subclasses of that class must either specify the override keyword when overriding the virtual method or the final keyword when overriding the virtual method and requiring that no further subclasses can override it.
+// You never want to annotate a method with more than one of the virtual, override, or final keywords.
+// Right
+// class Person {
+// public:
+//     virtual String description() { ... };
+// }
+// class Student : public Person {
+// public:
+//     String description() override { ... }; // This is correct because it only contains the "override" keyword to indicate that the method is overridden.
+// }
+//
+// class Person {
+// public:
+//     virtual String description() { ... };
+// }
+//
+// class Student : public Person {
+// public:
+//     String description() final { ... }; // This is correct because it only contains the "final" keyword to indicate that the method is overridden and that no subclasses of "Student" can override "description".
+// }
+//
+// Wrong
+// class Person {
+// public:
+//     virtual String description() { ... };
+// }
+// class Student : public Person {
+// public:
+//     virtual String description() override { ... }; // This is incorrect because it uses both the "virtual" and "override" keywords to indicate that the method is overridden. Instead, it should only use the "override" keyword.
+// }
+// class Person {
+// public:
+//     virtual String description() { ... };
+// }
+
+// class Student : public Person {
+// public:
+//     virtual String description() { ... }; // This is incorrect because it uses the "virtual" keyword to indicate that the method is overridden.
+// }
 
 
 int main()
