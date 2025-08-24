@@ -4,7 +4,7 @@ Checks: >
   modernize-use-nullptr, 
   readability-simplify-boolean-expr,
   readability-identifier-naming,
-  readability-else-after-return
+  readability-else-after-return,
   # option
   clang-diagnostic-*,
   clang-analyzer-*,
@@ -32,7 +32,14 @@ Checks: >
   bugprone-branch-clone,
   readability-container-size-empty,
   readability-redundant-smartptr-get,
-  readability-redundant-string-init
+  readability-redundant-string-init,
+  bugprone-unused-result,
+  bugprone-integer-division,
+  performance-unnecessary-value-param,
+  performance-for-range-copy,
+  performance-implicit-conversion-in-loop,
+  cppcoreguidelines-avoid-capturing-lambda-by-reference-in-return,
+  readability-redundant-declaration
 
 CheckOptions:
   - key: readability-identifier-naming.VariableCase
